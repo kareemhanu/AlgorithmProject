@@ -12,21 +12,30 @@ public class algos
 {
 
         
-  // Search for a patient by ID manually
-    public static Patient searchPatientById(Patient[] patients, int id) 
+    //BinarySearch
+    public static int searchPatientById(Patient[] patients, int id) 
     {
-        for (int i = 0; i < patients.length; i++)
+        int beg = 0;
+        int end = patients.length -1;
+        while (beg <= end)
         {
-            if (patients[i].getId() == id) 
-            {
-                return patients[i];
-                
-            }
+            int med = beg + (end - beg) / 2;
+            if (id == patients[med].getId())
+                return med;
+            
+            else if (id > patients[med].getId())
+                beg = med + 1;
+            
+            else
+                end = med - 1;
         }
-        return null;
+        return -1;
         
     }
-    public static void searchDoctorsBySpecialization(Doctor[] doctors, String specialization) {
+    
+    // Linear Search
+    public static void searchDoctorsBySpecialization(Doctor[] doctors, String specialization) 
+    {
         boolean found = false;
         for (int i = 0; i < doctors.length; i++) {
             if (doctors[i].getSpecialization().equals(specialization)) {
@@ -36,7 +45,10 @@ public class algos
             }
         }
     }
-    public static void sortHospitalsByName(Hospital[] hospitals) {
+    
+    //Bubble Sort
+    public static void sortHospitalsByName(Hospital[] hospitals) 
+    {
     int n = hospitals.length;
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
@@ -48,5 +60,27 @@ public class algos
             }
         }
     }
-}
+   }
+    
+    //Insertion Sort
+    // lazm ttrag3!!
+    public static void sortDoctorsById(Doctor[] doctors)
+    {
+        int n = doctors.length;
+        for (int j=1 ; j<n ; j++)
+        {
+            int key = doctors[j].getId();
+            Doctor keyDoctor = doctors[j];
+            int i = j-1;
+            
+            while( (i>=0) && (doctors[i].getId() > key))
+            {
+                doctors[i+1] = doctors[i];
+                i--;
+            }
+            
+
+            doctors[i + 1] = keyDoctor; 
+        }
+    }
 }
